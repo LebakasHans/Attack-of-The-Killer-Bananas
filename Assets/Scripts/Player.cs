@@ -1,16 +1,20 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
 
     public float speed = 5;
+    public GameObject projectile;
+
     Animator animator;
+    float actualSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        speed = speed / 700;
+        actualSpeed = speed / 150;
     }
 
     // Update is called once per frame
@@ -28,7 +32,19 @@ public class Player : MonoBehaviour
         if (h > 0)
             GetComponent<SpriteRenderer>().flipX = false;
 
-        gameObject.transform.position = new Vector2(transform.position.x + (h * speed),
-         transform.position.y + (v * speed));
+        gameObject.transform.position = new Vector2(transform.position.x + (h * actualSpeed),
+         transform.position.y + (v * actualSpeed));
+
+
+        //on left click instantiate the projectile in the direction of the mouse
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePos - transform.position).normalized;
+            projectileInstance.transform.up = direction;
+        }
     }
+
+
 }
