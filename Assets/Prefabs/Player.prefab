@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &394243149846668683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6152843011888388937}
+  - component: {fileID: 212436498674980278}
+  m_Layer: 6
+  m_Name: Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6152843011888388937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394243149846668683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6705596451396731566}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &212436498674980278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394243149846668683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc7fd7883f4ff542bc5752b5ce60283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2335899657022354721, guid: 6d579d8094280ab458e3b205f5d7f119, type: 3}
+  spawnInterval: 7
+  spawnRadius: 5
+  minEnemies: 5
+  maxEnemies: 10
 --- !u!1 &4646409314388708260
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 4646409314388708260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10.086148}
+  m_LocalPosition: {x: 0, y: 0, z: -17.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127,6 +176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6400267968862230487}
+  - {fileID: 6152843011888388937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1912732006635431725
@@ -241,7 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f00cbe1297ef64c82b5655319b51fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  Tombstone: {fileID: 4600388504773271221, guid: 1abc77e71389bc546a2ba5b0353b796b, type: 3}
+  Speed: 5
+  Health: 5
   projectile: {fileID: 617004059822687417, guid: d342e19a3281cc34b805fc4d7a9dc6db, type: 3}
 --- !u!70 &7510166522470506931
 CapsuleCollider2D:

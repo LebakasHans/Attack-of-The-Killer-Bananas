@@ -3,24 +3,29 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
-
-    public float speed = 5;
+    public float Speed = 5;
+    public float Health = 5;
     public GameObject projectile;
 
     Animator animator;
+    SpriteRenderer spriteRenderer;
     float actualSpeed;
+    bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        actualSpeed = speed / 150;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        actualSpeed = Speed / 150;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Readability 100 Unlocked
+        if (isDead)
+            return; 
+
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
@@ -28,9 +33,9 @@ public class Player : MonoBehaviour
         animator.SetBool("isWalking", isWalking);
 
         if (h < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
+            spriteRenderer.flipX = true;
         if (h > 0)
-            GetComponent<SpriteRenderer>().flipX = false;
+            spriteRenderer.flipX = false;
 
         gameObject.transform.position = new Vector2(transform.position.x + (h * actualSpeed),
          transform.position.y + (v * actualSpeed));
@@ -46,5 +51,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Trip")
+        {
+            float randomRotation = Random.Range(0, 360);
+            transform.rotation = Quaternion.Euler(0, 0, randomRotation);
+        }
+    }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (isDead)
+            return;
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Health--;
+
+            if (Health <= 0)
+            {
+                isDead = true;
+                spriteRenderer.enabled = false;
+            }
+
+            GetComponent<SpriteRenderer>().color = Color.red;
+            GetComponent<Rigidbody2D>().simulated = false;
+            Invoke("UndoInvincibility", 1);
+        }
+    }
+
+    private void UndoInvincibility()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<Rigidbody2D>().simulated = true;
+    }
 }

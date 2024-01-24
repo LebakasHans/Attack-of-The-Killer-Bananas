@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Enemy
+  - Trip
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -37,9 +38,9 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, Target.position, Speed * Time.deltaTime);
         //flip x if enemy is moving right
         if (transform.position.x < Target.position.x)
-            GetComponent<SpriteRenderer>().flipX = true;
+            SpriteRenderer.flipX = true;
         else if (transform.position.x > Target.position.x)
-            GetComponent<SpriteRenderer>().flipX = false;
+            SpriteRenderer.flipX = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,9 +51,12 @@ public class Enemy : MonoBehaviour
             if (Health <= 0)
             {
                 Anim.SetBool("IsDead", true);
+                TMP_Text score = GameObject.Find("ScoreText").GetComponents<TMP_Text>()[0];
+                int scoreInt = int.Parse(score.text);
+                scoreInt++;
+                score.text = scoreInt.ToString("000000");
                 Instantiate(Tombstone, transform.position, Quaternion.identity);
                 Destroy(gameObject);
-
             }
             Destroy(collision.gameObject);
         }

@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tombstone: {fileID: 4600388504773271221, guid: 1abc77e71389bc546a2ba5b0353b796b, type: 3}
   Speed: 1
-  Health: 5
+  Health: 2
   colors:
   - {r: 1, g: 1, b: 1, a: 0.003921569}
   - {r: 0.07817725, g: 0.5754717, b: 0.24965812, a: 0.003921569}
